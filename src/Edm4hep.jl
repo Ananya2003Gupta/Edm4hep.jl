@@ -16,7 +16,7 @@ export CaloHitContribution
 export SimCalorimeterHit
 export RawCalorimeterHit
 export CalorimeterHit
-export ParticleIDP
+export ParticleID
 export Cluster
 export TrackerHit
 export TrackerHitPlane
@@ -37,6 +37,7 @@ export TrackerPulse
 export RecIonizationCluster
 export TimeSeries
 export RecDqdx
+export MCParticleCollection
 
 include("Vector3fStruct.jl")
 include("Vector3dStruct.jl")
