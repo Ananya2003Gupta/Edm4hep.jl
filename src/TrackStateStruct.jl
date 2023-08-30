@@ -1,6 +1,5 @@
-include("Vector3fStruct.jl")
 using StaticArrays
-
+include("Vector3fStruct.jl")
 mutable struct TrackStateStruct
 	location::Int32
 	D0::Float32

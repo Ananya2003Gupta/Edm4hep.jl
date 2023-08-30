@@ -1,7 +1,6 @@
-include("Vector2iStruct.jl")
 include("Vector3dStruct.jl")
 include("Vector3fStruct.jl")
-
+include("Vector2iStruct.jl")
 mutable struct MCParticleStruct{MCParticleT}
 	PDG::Int32
 	generatorStatus::Int32

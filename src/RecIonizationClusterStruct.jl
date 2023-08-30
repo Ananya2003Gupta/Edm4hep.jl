@@ -4,3 +4,4 @@ mutable struct RecIonizationClusterStruct{TrackerPulseT}
 	type::Int16
 	trackerPulse::Vector{ TrackerPulseT }
 end
+

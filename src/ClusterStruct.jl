@@ -1,6 +1,6 @@
-include("Vector3fStruct.jl")
 using StaticArrays
 
+include("Vector3fStruct.jl")
 mutable struct ClusterStruct{CalorimeterHitT,ParticleIDT,ClusterT}
 	type::Int32
 	energy::Float32

@@ -1,8 +1,8 @@
-include("Vector3dStruct.jl")
-include("ObjectIDStruct.jl")
-include("Vector2fStruct.jl")
 using StaticArrays
 
+include("Vector3dStruct.jl")
+include("Vector2fStruct.jl")
+include("ObjectIDStruct.jl")
 mutable struct TrackerHitPlaneStruct
 	cellID::UInt64
 	type::Int32

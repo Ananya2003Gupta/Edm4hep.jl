@@ -3,3 +3,4 @@ mutable struct RecoParticleVertexAssociationStruct{ReconstructedParticleT,Vertex
 	rec::Union{Nothing, ReconstructedParticleT }
 	vertex::Union{Nothing, VertexT }
 end
+
