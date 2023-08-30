@@ -10,34 +10,61 @@ export Quantity
 export Hypothesis
 export HitLevelData
 export EventHeader
+export EventHeaderCollection
 export MCParticle
-export SimTrackerHit
-export CaloHitContribution
-export SimCalorimeterHit
-export RawCalorimeterHit
-export CalorimeterHit
-export ParticleID
-export Cluster
-export TrackerHit
-export TrackerHitPlane
-export RawTimeSeries
-export Track
-export Vertex
-export ReconstructedParticle
-export MCRecoParticleAssociation
-export MCRecoCaloAssociation
-export MCRecoTrackerAssociation
-export MCRecoTrackerHitPlaneAssociation
-export MCRecoCaloParticleAssociation
-export MCRecoClusterParticleAssociation
-export MCRecoTrackParticleAssociation
-export RecoParticleVertexAssociation
-export SimPrimaryIonizationCluster
-export TrackerPulse
-export RecIonizationCluster
-export TimeSeries
-export RecDqdx
 export MCParticleCollection
+export SimTrackerHit
+export SimTrackerHitCollection
+export CaloHitContribution
+export CaloHitContributionCollection
+export SimCalorimeterHit
+export SimCalorimeterHitCollection
+export RawCalorimeterHit
+export RawCalorimeterHitCollection
+export CalorimeterHit
+export CalorimeterHitCollection
+export ParticleID
+export ParticleIDCollection
+export Cluster
+export ClusterCollection
+export TrackerHit
+export TrackerHitCollection
+export TrackerHitPlane
+export TrackerHitPlaneCollection
+export RawTimeSeries
+export RawTimeSeriesCollection
+export Track
+export TrackCollection
+export Vertex
+export VertexCollection
+export ReconstructedParticle
+export ReconstructedParticleCollection
+export MCRecoParticleAssociation
+export MCRecoParticleAssociationCollection
+export MCRecoCaloAssociation
+export MCRecoCaloAssociationCollection
+export MCRecoTrackerAssociation
+export MCRecoTrackerAssociationCollection
+export MCRecoTrackerHitPlaneAssociation
+export MCRecoTrackerHitPlaneAssociationCollection
+export MCRecoCaloParticleAssociation
+export MCRecoCaloParticleAssociationCollection
+export MCRecoClusterParticleAssociation
+export MCRecoClusterParticleAssociationCollection
+export MCRecoTrackParticleAssociation
+export MCRecoTrackParticleAssociationCollection
+export RecoParticleVertexAssociation
+export RecoParticleVertexAssociationCollection
+export SimPrimaryIonizationCluster
+export SimPrimaryIonizationClusterCollection
+export TrackerPulse
+export TrackerPulseCollection
+export RecIonizationCluster
+export RecIonizationClusterCollection
+export TimeSeries
+export TimeSeriesCollection
+export RecDqdx
+export RecDqdxCollection
 
 include("Vector3fStruct.jl")
 include("Vector3dStruct.jl")
@@ -76,7 +103,6 @@ include("TrackerPulseStruct.jl")
 include("RecIonizationClusterStruct.jl")
 include("TimeSeriesStruct.jl")
 include("RecDqdxStruct.jl")
-using StaticArrays
 
 function Vector3f(
 	x::Float32 = Float32(0),
@@ -193,6 +219,7 @@ function HitLevelData(
 	pathLength,
 	)
 end
+
 
 function EventHeader(
 	eventNumber::Int32 = Int32(0),
@@ -483,7 +510,7 @@ function Track(
 	trackStates::Vector{ TrackStateStruct } = Vector{ TrackStateStruct }([]),
 	dxQuantities::Vector{ QuantityStruct } = Vector{ QuantityStruct }([]),
 )
-	return TrackStruct{TrackStruct, TrackerHitStruct}(
+	return TrackStruct{TrackStruct,TrackerHitStruct}(
 	type,
 	chi2,
 	ndf,
@@ -498,7 +525,7 @@ function Track(
 	)
 end
 
-TrackCollection = Vector{ TrackStruct{TrackStruct, TrackerHitStruct} }
+TrackCollection = Vector{ TrackStruct{TrackStruct,TrackerHitStruct} }
 
 function Vertex(
 	primary::Int32 = Int32(0),
@@ -540,7 +567,7 @@ function ReconstructedParticle(
 	startVertex::Union{Nothing, VertexStruct } = nothing,
 	particleIDUsed::Union{Nothing, ParticleIDStruct } = nothing,
 )
-	return ReconstructedParticleStruct{VertexStruct,ParticleIDStruct,TrackStruct,ReconstructedParticleStruct,ClusterStruct}(
+	return ReconstructedParticleStruct{ReconstructedParticleStruct,TrackStruct,ClusterStruct,ParticleIDStruct,VertexStruct}(
 	type,
 	energy,
 	momentum,
@@ -558,7 +585,7 @@ function ReconstructedParticle(
 	)
 end
 
-ReconstructedParticleCollection = Vector{ ReconstructedParticleStruct{VertexStruct,ParticleIDStruct,TrackStruct,ReconstructedParticleStruct,ClusterStruct} }
+ReconstructedParticleCollection = Vector{ ReconstructedParticleStruct{ReconstructedParticleStruct,TrackStruct,ClusterStruct,ParticleIDStruct,VertexStruct} }
 
 function MCRecoParticleAssociation(
 	weight::Float32 = Float32(0),
@@ -593,14 +620,14 @@ function MCRecoTrackerAssociation(
 	rec::Union{Nothing, TrackerHitStruct } = nothing,
 	sim::Union{Nothing, SimTrackerHitStruct } = nothing,
 )
-	return MCRecoTrackerAssociationStruct{SimTrackerHitStruct,TrackerHitStruct}(
+	return MCRecoTrackerAssociationStruct{TrackerHitStruct,SimTrackerHitStruct}(
 	weight,
 	rec,
 	sim,
 	)
 end
 
-MCRecoTrackerAssociationCollection = Vector{ MCRecoTrackerAssociationStruct{SimTrackerHitStruct,TrackerHitStruct} }
+MCRecoTrackerAssociationCollection = Vector{ MCRecoTrackerAssociationStruct{TrackerHitStruct,SimTrackerHitStruct} }
 
 function MCRecoTrackerHitPlaneAssociation(
 	weight::Float32 = Float32(0),
@@ -649,14 +676,14 @@ function MCRecoTrackParticleAssociation(
 	rec::Union{Nothing, TrackStruct } = nothing,
 	sim::Union{Nothing, MCParticleStruct } = nothing,
 )
-	return MCRecoTrackParticleAssociationStruct{TrackStruct,MCParticleStruct}(
+	return MCRecoTrackParticleAssociationStruct{MCParticleStruct,TrackStruct}(
 	weight,
 	rec,
 	sim,
 	)
 end
 
-MCRecoTrackParticleAssociationCollection = Vector{ MCRecoTrackParticleAssociationStruct{TrackStruct,MCParticleStruct} }
+MCRecoTrackParticleAssociationCollection = Vector{ MCRecoTrackParticleAssociationStruct{MCParticleStruct,TrackStruct} }
 
 function RecoParticleVertexAssociation(
 	weight::Float32 = Float32(0),
