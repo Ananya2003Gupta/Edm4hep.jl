@@ -1,4 +1,5 @@
-mutable struct MCRecoCaloAssociationStruct{SimCalorimeterHitT,CalorimeterHitT}
+
+mutable struct MCRecoCaloAssociationStruct{CalorimeterHitT,SimCalorimeterHitT}
 	weight::Float32
 	rec::Union{Nothing, CalorimeterHitT }
 	sim::Union{Nothing, SimCalorimeterHitT }

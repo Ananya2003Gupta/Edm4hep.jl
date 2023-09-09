@@ -1,5 +1,4 @@
 using StaticArrays
-
 mutable struct TrackerPulseStruct{TimeSeriesT}
 	cellID::UInt64
 	time::Float32

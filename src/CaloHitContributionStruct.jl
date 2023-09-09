@@ -1,3 +1,4 @@
+
 include("Vector3fStruct.jl")
 mutable struct CaloHitContributionStruct{MCParticleT}
 	PDG::Int32

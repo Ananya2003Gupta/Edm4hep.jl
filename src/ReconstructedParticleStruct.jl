@@ -1,7 +1,7 @@
-using StaticArrays
 
 include("Vector3fStruct.jl")
-mutable struct ReconstructedParticleStruct{ReconstructedParticleT,TrackT,ClusterT,ParticleIDT,VertexT}
+using StaticArrays
+mutable struct ReconstructedParticleStruct{ClusterT,ParticleIDT,ReconstructedParticleT,TrackT,VertexT}
 	type::Int32
 	energy::Float32
 	momentum::Vector3fStruct
