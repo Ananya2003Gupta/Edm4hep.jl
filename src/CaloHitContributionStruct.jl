@@ -1,5 +1,3 @@
-
-include("Vector3fStruct.jl")
 mutable struct CaloHitContributionStruct{MCParticleT}
 	PDG::Int32
 	energy::Float32

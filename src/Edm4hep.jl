@@ -66,6 +66,7 @@ export TimeSeriesCollection
 export RecDqdx
 export RecDqdxCollection
 
+using StaticArrays 
 include("Vector3fStruct.jl")
 include("Vector3dStruct.jl")
 include("Vector2iStruct.jl")

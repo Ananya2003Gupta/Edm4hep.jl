@@ -1,6 +1,3 @@
-
-include("Vector3fStruct.jl")
-using StaticArrays
 mutable struct VertexStruct{ReconstructedParticleT}
 	primary::Int32
 	chi2::Float32

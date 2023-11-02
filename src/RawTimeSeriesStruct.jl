@@ -1,4 +1,3 @@
-
 mutable struct RawTimeSeriesStruct
 	cellID::UInt64
 	quality::Int32

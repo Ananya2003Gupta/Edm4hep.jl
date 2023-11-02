@@ -1,5 +1,3 @@
-
-include("Vector3dStruct.jl")
 mutable struct SimPrimaryIonizationClusterStruct{MCParticleT}
 	cellID::UInt64
 	time::Float32
