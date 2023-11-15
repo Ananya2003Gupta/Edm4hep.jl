@@ -1,6 +1,3 @@
-
-include("QuantityStruct.jl")
-include("TrackStateStruct.jl")
 mutable struct TrackStruct{TrackT,TrackerHitT}
 	type::Int32
 	chi2::Float32

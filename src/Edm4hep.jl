@@ -1,5 +1,5 @@
-module Edm4hep
 
+module Edm4hep
 export Vector3f
 export Vector3d
 export Vector2i
@@ -66,42 +66,44 @@ export TimeSeriesCollection
 export RecDqdx
 export RecDqdxCollection
 
+
+using StaticArrays
+include("RawTimeSeriesStruct.jl")
+include("TrackerPulseStruct.jl")
+include("EventHeaderStruct.jl")
+include("MCRecoCaloAssociationStruct.jl")
+include("RecIonizationClusterStruct.jl")
+include("MCRecoParticleAssociationStruct.jl")
+include("Vector2fStruct.jl")
 include("Vector3fStruct.jl")
 include("Vector3dStruct.jl")
-include("Vector2iStruct.jl")
-include("Vector2fStruct.jl")
-include("TrackStateStruct.jl")
-include("ObjectIDStruct.jl")
-include("QuantityStruct.jl")
-include("HypothesisStruct.jl")
-include("HitLevelDataStruct.jl")
-include("EventHeaderStruct.jl")
-include("MCParticleStruct.jl")
-include("SimTrackerHitStruct.jl")
-include("CaloHitContributionStruct.jl")
-include("SimCalorimeterHitStruct.jl")
-include("RawCalorimeterHitStruct.jl")
-include("CalorimeterHitStruct.jl")
-include("ParticleIDStruct.jl")
-include("ClusterStruct.jl")
-include("TrackerHitStruct.jl")
-include("TrackerHitPlaneStruct.jl")
-include("RawTimeSeriesStruct.jl")
-include("TrackStruct.jl")
-include("VertexStruct.jl")
-include("ReconstructedParticleStruct.jl")
-include("MCRecoParticleAssociationStruct.jl")
-include("MCRecoCaloAssociationStruct.jl")
-include("MCRecoTrackerAssociationStruct.jl")
-include("MCRecoTrackerHitPlaneAssociationStruct.jl")
-include("MCRecoCaloParticleAssociationStruct.jl")
-include("MCRecoClusterParticleAssociationStruct.jl")
 include("MCRecoTrackParticleAssociationStruct.jl")
+include("Vector2iStruct.jl")
+include("MCRecoTrackerAssociationStruct.jl")
+include("ObjectIDStruct.jl")
+include("MCRecoClusterParticleAssociationStruct.jl")
+include("RawCalorimeterHitStruct.jl")
 include("RecoParticleVertexAssociationStruct.jl")
-include("SimPrimaryIonizationClusterStruct.jl")
-include("TrackerPulseStruct.jl")
-include("RecIonizationClusterStruct.jl")
 include("TimeSeriesStruct.jl")
+include("MCRecoTrackerHitPlaneAssociationStruct.jl")
+include("QuantityStruct.jl")
+include("HitLevelDataStruct.jl")
+include("HypothesisStruct.jl")
+include("MCRecoCaloParticleAssociationStruct.jl")
+include("ParticleIDStruct.jl")
+include("MCParticleStruct.jl")
+include("SimPrimaryIonizationClusterStruct.jl")
+include("SimCalorimeterHitStruct.jl")
+include("VertexStruct.jl")
+include("ClusterStruct.jl")
+include("ReconstructedParticleStruct.jl")
+include("TrackStateStruct.jl")
+include("CaloHitContributionStruct.jl")
+include("CalorimeterHitStruct.jl")
+include("TrackerHitPlaneStruct.jl")
+include("SimTrackerHitStruct.jl")
+include("TrackerHitStruct.jl")
+include("TrackStruct.jl")
 include("RecDqdxStruct.jl")
 
 function Vector3f(
@@ -226,7 +228,7 @@ function EventHeader(
 	runNumber::Integer = Int32(0),
 	timeStamp::Integer = UInt64(0),
 	weight::Real = Float32(0),
-)
+) 
 	return EventHeaderStruct(
 	Int32(eventNumber),
 	Int32(runNumber),
@@ -252,7 +254,7 @@ function MCParticle(
 	colorFlow::Vector2iStruct = Vector2i(),
 	parents::Vector{ MCParticleStruct } = Vector{ MCParticleStruct }(),
 	daughters::Vector{ MCParticleStruct } = Vector{ MCParticleStruct }(),
-)
+) 
 	return MCParticleStruct{MCParticleStruct}(
 	Int32(PDG),
 	Int32(generatorStatus),
@@ -282,7 +284,7 @@ function SimTrackerHit(
 	position::Vector3dStruct = Vector3d(),
 	momentum::Vector3fStruct = Vector3f(),
 	MCParticle::Union{Nothing, MCParticleStruct } = nothing,
-)
+) 
 	return SimTrackerHitStruct{MCParticleStruct}(
 	UInt64(cellID),
 	Float32(EDep),
@@ -303,7 +305,7 @@ function CaloHitContribution(
 	time::Real = Float32(0),
 	stepPosition::Vector3fStruct = Vector3f(),
 	particle::Union{Nothing, MCParticleStruct } = nothing,
-)
+) 
 	return CaloHitContributionStruct{MCParticleStruct}(
 	Int32(PDG),
 	Float32(energy),
@@ -320,7 +322,7 @@ function SimCalorimeterHit(
 	energy::Real = Float32(0),
 	position::Vector3fStruct = Vector3f(),
 	contributions::Vector{ CaloHitContributionStruct } = Vector{ CaloHitContributionStruct }(),
-)
+) 
 	return SimCalorimeterHitStruct{CaloHitContributionStruct}(
 	UInt64(cellID),
 	Float32(energy),
@@ -335,7 +337,7 @@ function RawCalorimeterHit(
 	cellID::Integer = UInt64(0),
 	amplitude::Integer = Int32(0),
 	timeStamp::Integer = Int32(0),
-)
+) 
 	return RawCalorimeterHitStruct(
 	UInt64(cellID),
 	Int32(amplitude),
@@ -352,7 +354,7 @@ function CalorimeterHit(
 	time::Real = Float32(0),
 	position::Vector3fStruct = Vector3f(),
 	type::Integer = Int32(0),
-)
+) 
 	return CalorimeterHitStruct(
 	UInt64(cellID),
 	Float32(energy),
@@ -370,14 +372,15 @@ function ParticleID(
 	PDG::Integer = Int32(0),
 	algorithmType::Integer = Int32(0),
 	likelihood::Real = Float32(0),
-	parameters::Vector{ Float32 } = Vector{ Float32 }([]),
-)
+	parameters::Vector{ parametersT } = Vector{ Float32 }([]),
+) where {parametersT<:Real}
+
 	return ParticleIDStruct(
 	Int32(type),
 	Int32(PDG),
 	Int32(algorithmType),
 	Float32(likelihood),
-	parameters,
+	convert(Vector{ Float32 }, parameters),
 	)
 end
 
@@ -395,9 +398,10 @@ function Cluster(
 	clusters::Vector{ ClusterStruct } = Vector{ ClusterStruct }(),
 	hits::Vector{ CalorimeterHitStruct } = Vector{ CalorimeterHitStruct }(),
 	particleIDs::Vector{ ParticleIDStruct } = Vector{ ParticleIDStruct }(),
-	shapeParameters::Vector{ Float32 } = Vector{ Float32 }([]),
-	subdetectorEnergies::Vector{ Float32 } = Vector{ Float32 }([]),
-)
+	shapeParameters::Vector{ shapeParametersT } = Vector{ Float32 }([]),
+	subdetectorEnergies::Vector{ subdetectorEnergiesT } = Vector{ Float32 }([]),
+) where {shapeParametersT<:Real,subdetectorEnergiesT<:Real}
+
 	return ClusterStruct{CalorimeterHitStruct,ClusterStruct,ParticleIDStruct}(
 	Int32(type),
 	Float32(energy),
@@ -410,8 +414,8 @@ function Cluster(
 	clusters,
 	hits,
 	particleIDs,
-	shapeParameters,
-	subdetectorEnergies,
+	convert(Vector{ Float32 }, shapeParameters),
+	convert(Vector{ Float32 }, subdetectorEnergies),
 	)
 end
 
@@ -427,7 +431,7 @@ function TrackerHit(
 	position::Vector3dStruct = Vector3d(),
 	covMatrix::MVector{6, Float32} = MVector{6, Float32}(undef),
 	rawHits::Vector{ ObjectIDStruct } = Vector{ ObjectIDStruct }([]),
-)
+) 
 	return TrackerHitStruct(
 	UInt64(cellID),
 	Int32(type),
@@ -457,7 +461,7 @@ function TrackerHitPlane(
 	position::Vector3dStruct = Vector3d(),
 	covMatrix::MVector{6, Float32} = MVector{6, Float32}(undef),
 	rawHits::Vector{ ObjectIDStruct } = Vector{ ObjectIDStruct }([]),
-)
+) 
 	return TrackerHitPlaneStruct(
 	UInt64(cellID),
 	Int32(type),
@@ -483,15 +487,16 @@ function RawTimeSeries(
 	time::Real = Float32(0),
 	charge::Real = Float32(0),
 	interval::Real = Float32(0),
-	adcCounts::Vector{ Int32 } = Vector{ Int32 }([]),
-)
+	adcCounts::Vector{ adcCountsT } = Vector{ Int32 }([]),
+) where {adcCountsT<:Integer}
+
 	return RawTimeSeriesStruct(
 	UInt64(cellID),
 	Int32(quality),
 	Float32(time),
 	Float32(charge),
 	Float32(interval),
-	adcCounts,
+	convert(Vector{ Int32 }, adcCounts),
 	)
 end
 
@@ -506,10 +511,11 @@ function Track(
 	radiusOfInnermostHit::Real = Float32(0),
 	trackerHits::Vector{ TrackerHitStruct } = Vector{ TrackerHitStruct }(),
 	tracks::Vector{ TrackStruct } = Vector{ TrackStruct }(),
-	subdetectorHitNumbers::Vector{ Int32 } = Vector{ Int32 }([]),
+	subdetectorHitNumbers::Vector{ subdetectorHitNumbersT } = Vector{ Int32 }([]),
 	trackStates::Vector{ TrackStateStruct } = Vector{ TrackStateStruct }([]),
 	dxQuantities::Vector{ QuantityStruct } = Vector{ QuantityStruct }([]),
-)
+) where {subdetectorHitNumbersT<:Integer,}
+
 	return TrackStruct{TrackStruct,TrackerHitStruct}(
 	Int32(type),
 	Float32(chi2),
@@ -519,7 +525,7 @@ function Track(
 	Float32(radiusOfInnermostHit),
 	trackerHits,
 	tracks,
-	subdetectorHitNumbers,
+	convert(Vector{ Int32 }, subdetectorHitNumbers),
 	trackStates,
 	dxQuantities,
 	)
@@ -535,8 +541,9 @@ function Vertex(
 	covMatrix::MVector{6, Float32} = MVector{6, Float32}(undef),
 	algorithmType::Integer = Int32(0),
 	associatedParticle::Union{Nothing, ReconstructedParticleStruct } = nothing,
-	parameters::Vector{ Float32 } = Vector{ Float32 }([]),
-)
+	parameters::Vector{ parametersT } = Vector{ Float32 }([]),
+) where {parametersT<:Real}
+
 	return VertexStruct{ReconstructedParticleStruct}(
 	Int32(primary),
 	Float32(chi2),
@@ -545,7 +552,7 @@ function Vertex(
 	covMatrix,
 	Int32(algorithmType),
 	associatedParticle,
-	parameters,
+	convert(Vector{ Float32 }, parameters),
 	)
 end
 
@@ -566,7 +573,7 @@ function ReconstructedParticle(
 	particleIDs::Vector{ ParticleIDStruct } = Vector{ ParticleIDStruct }(),
 	startVertex::Union{Nothing, VertexStruct } = nothing,
 	particleIDUsed::Union{Nothing, ParticleIDStruct } = nothing,
-)
+) 
 	return ReconstructedParticleStruct{ClusterStruct,ParticleIDStruct,ReconstructedParticleStruct,TrackStruct,VertexStruct}(
 	Int32(type),
 	Float32(energy),
@@ -591,7 +598,7 @@ function MCRecoParticleAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, ReconstructedParticleStruct } = nothing,
 	sim::Union{Nothing, MCParticleStruct } = nothing,
-)
+) 
 	return MCRecoParticleAssociationStruct{MCParticleStruct,ReconstructedParticleStruct}(
 	Float32(weight),
 	rec,
@@ -605,7 +612,7 @@ function MCRecoCaloAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, CalorimeterHitStruct } = nothing,
 	sim::Union{Nothing, SimCalorimeterHitStruct } = nothing,
-)
+) 
 	return MCRecoCaloAssociationStruct{CalorimeterHitStruct,SimCalorimeterHitStruct}(
 	Float32(weight),
 	rec,
@@ -619,7 +626,7 @@ function MCRecoTrackerAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, TrackerHitStruct } = nothing,
 	sim::Union{Nothing, SimTrackerHitStruct } = nothing,
-)
+) 
 	return MCRecoTrackerAssociationStruct{SimTrackerHitStruct,TrackerHitStruct}(
 	Float32(weight),
 	rec,
@@ -633,7 +640,7 @@ function MCRecoTrackerHitPlaneAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, TrackerHitPlaneStruct } = nothing,
 	sim::Union{Nothing, SimTrackerHitStruct } = nothing,
-)
+) 
 	return MCRecoTrackerHitPlaneAssociationStruct{SimTrackerHitStruct,TrackerHitPlaneStruct}(
 	Float32(weight),
 	rec,
@@ -647,7 +654,7 @@ function MCRecoCaloParticleAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, CalorimeterHitStruct } = nothing,
 	sim::Union{Nothing, MCParticleStruct } = nothing,
-)
+) 
 	return MCRecoCaloParticleAssociationStruct{CalorimeterHitStruct,MCParticleStruct}(
 	Float32(weight),
 	rec,
@@ -661,7 +668,7 @@ function MCRecoClusterParticleAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, ClusterStruct } = nothing,
 	sim::Union{Nothing, MCParticleStruct } = nothing,
-)
+) 
 	return MCRecoClusterParticleAssociationStruct{ClusterStruct,MCParticleStruct}(
 	Float32(weight),
 	rec,
@@ -675,7 +682,7 @@ function MCRecoTrackParticleAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, TrackStruct } = nothing,
 	sim::Union{Nothing, MCParticleStruct } = nothing,
-)
+) 
 	return MCRecoTrackParticleAssociationStruct{MCParticleStruct,TrackStruct}(
 	Float32(weight),
 	rec,
@@ -689,7 +696,7 @@ function RecoParticleVertexAssociation(
 	weight::Real = Float32(0),
 	rec::Union{Nothing, ReconstructedParticleStruct } = nothing,
 	vertex::Union{Nothing, VertexStruct } = nothing,
-)
+) 
 	return RecoParticleVertexAssociationStruct{ReconstructedParticleStruct,VertexStruct}(
 	Float32(weight),
 	rec,
@@ -705,23 +712,24 @@ function SimPrimaryIonizationCluster(
 	position::Vector3dStruct = Vector3d(),
 	type::Integer = Int16(0),
 	MCParticle::Union{Nothing, MCParticleStruct } = nothing,
-	electronCellID::Vector{ UInt64 } = Vector{ UInt64 }([]),
-	electronTime::Vector{ Float32 } = Vector{ Float32 }([]),
+	electronCellID::Vector{ electronCellIDT } = Vector{ UInt64 }([]),
+	electronTime::Vector{ electronTimeT } = Vector{ Float32 }([]),
 	electronPosition::Vector{ Vector3dStruct } = Vector{ Vector3dStruct }([]),
-	pulseTime::Vector{ Float32 } = Vector{ Float32 }([]),
-	pulseAmplitude::Vector{ Float32 } = Vector{ Float32 }([]),
-)
+	pulseTime::Vector{ pulseTimeT } = Vector{ Float32 }([]),
+	pulseAmplitude::Vector{ pulseAmplitudeT } = Vector{ Float32 }([]),
+) where {electronCellIDT<:Integer,electronTimeT<:Real,pulseTimeT<:Real,pulseAmplitudeT<:Real}
+
 	return SimPrimaryIonizationClusterStruct{MCParticleStruct}(
 	UInt64(cellID),
 	Float32(time),
 	position,
 	Int16(type),
 	MCParticle,
-	electronCellID,
-	electronTime,
+	convert(Vector{ UInt64 }, electronCellID),
+	convert(Vector{ Float32 }, electronTime),
 	electronPosition,
-	pulseTime,
-	pulseAmplitude,
+	convert(Vector{ Float32 }, pulseTime),
+	convert(Vector{ Float32 }, pulseAmplitude),
 	)
 end
 
@@ -734,7 +742,7 @@ function TrackerPulse(
 	quality::Integer = Int16(0),
 	covMatrix::MVector{3, Float32} = MVector{3, Float32}(undef),
 	timeSeries::Union{Nothing, TimeSeriesStruct } = nothing,
-)
+) 
 	return TrackerPulseStruct{TimeSeriesStruct}(
 	UInt64(cellID),
 	Float32(time),
@@ -752,7 +760,7 @@ function RecIonizationCluster(
 	significance::Real = Float32(0),
 	type::Integer = Int16(0),
 	trackerPulse::Vector{ TrackerPulseStruct } = Vector{ TrackerPulseStruct }(),
-)
+) 
 	return RecIonizationClusterStruct{TrackerPulseStruct}(
 	UInt64(cellID),
 	Float32(significance),
@@ -767,13 +775,14 @@ function TimeSeries(
 	cellID::Integer = UInt64(0),
 	time::Real = Float32(0),
 	interval::Real = Float32(0),
-	amplitude::Vector{ Float32 } = Vector{ Float32 }([]),
-)
+	amplitude::Vector{ amplitudeT } = Vector{ Float32 }([]),
+) where {amplitudeT<:Real}
+
 	return TimeSeriesStruct(
 	UInt64(cellID),
 	Float32(time),
 	Float32(interval),
-	amplitude,
+	convert(Vector{ Float32 }, amplitude),
 	)
 end
 
@@ -786,7 +795,7 @@ function RecDqdx(
 	hypotheses::MVector{5, HypothesisStruct} = MVector{5, HypothesisStruct}(undef),
 	track::Union{Nothing, TrackStruct } = nothing,
 	hitData::Vector{ HitLevelDataStruct } = Vector{ HitLevelDataStruct }([]),
-)
+) 
 	return RecDqdxStruct{TrackStruct}(
 	dQdx,
 	Int16(particleType),

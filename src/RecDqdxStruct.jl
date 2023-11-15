@@ -1,8 +1,3 @@
-
-include("HitLevelDataStruct.jl")
-include("HypothesisStruct.jl")
-include("QuantityStruct.jl")
-using StaticArrays
 mutable struct RecDqdxStruct{TrackT}
 	dQdx::QuantityStruct
 	particleType::Int16

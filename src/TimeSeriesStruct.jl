@@ -1,4 +1,3 @@
-
 mutable struct TimeSeriesStruct
 	cellID::UInt64
 	time::Float32

@@ -1,4 +1,3 @@
-
 mutable struct RecIonizationClusterStruct{TrackerPulseT}
 	cellID::UInt64
 	significance::Float32

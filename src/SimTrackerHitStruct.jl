@@ -1,6 +1,3 @@
-
-include("Vector3dStruct.jl")
-include("Vector3fStruct.jl")
 mutable struct SimTrackerHitStruct{MCParticleT}
 	cellID::UInt64
 	EDep::Float32
