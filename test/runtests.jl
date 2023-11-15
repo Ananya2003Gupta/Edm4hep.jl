@@ -40,7 +40,6 @@ using StaticArrays
 		mcp2.PDG = -130
 		mcp3.PDG = 211
 
-	    # passes if values are changed in parents
 	    @test mcp2.parents[1].PDG == 22
 	    @test mcp1.daughters[1].PDG == -130
 	    @test mcp1.daughters[2].PDG == 211
