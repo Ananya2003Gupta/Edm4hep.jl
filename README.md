@@ -85,7 +85,7 @@ The future development of this package includes:
 
 Please note that both branches are experimental and may undergo further changes in the future.
 
-## Generating Julia Files from PODIO
+## Generating Julia Files from PODIO:
 
 This package provides a prototypic implementation of the EDM4hep data model in Julia. The initial code generation was performed using the PODIO library:
 
@@ -97,7 +97,7 @@ This command generates all Julia files into the `edm4hep_julia/edm4hep` director
 
 **Please note:** While the basic functionalities are implemented, the generated code may undergo further modifications and improvements in future versions.
 
-## Open Issues and Feedback
+## Open Issues and Feedback:
 
 We encourage you to contribute to the development of this package by providing valuable feedback and reporting any issues you encounter. You can open issues on the project's GitHub repository to:
 
