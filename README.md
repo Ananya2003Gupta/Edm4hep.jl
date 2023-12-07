@@ -1,7 +1,7 @@
-# EDM4hep.jl: A Prototypic Edm4hep Julia Package
+# Edm4hep.jl: A Prototypic Edm4hep Julia Package
 [![Build Status](https://github.com/Ananya2003Gupta/Edm4hep.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Ananya2003Gupta/Edm4hep.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
-**Package:** EDM4hep.jl
+**Package:** Edm4hep.jl
 
 **Version:** 1.0.0-DEV
 
@@ -33,12 +33,12 @@ This package is currently under development and does not yet have I/O functional
 ## **Installation:**
 
 1. Clone this repository: `git clone https://github.com/Ananya2003Gupta/Edm4hep.jl.git`
-2. Run `julia` and within the REPL, type `using Pkg; Pkg.add("EDM4hep.jl")`.
+2. Run `julia` and within the REPL, type `using Pkg; Pkg.add("Edm4hep.jl")`.
 
 ## **Usage Examples:**
 
 ```julia
-using EDM4hep
+using Edm4hep
 
 mcp1 = MCParticle()
 mcp1.PDG = 1210
