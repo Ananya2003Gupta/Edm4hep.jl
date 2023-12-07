@@ -32,8 +32,7 @@ This package is currently under development and does not yet have I/O functional
 
 ## **Installation:**
 
-1. Clone this repository: `git clone https://github.com/Ananya2003Gupta/Edm4hep.jl.git`
-2. Run `julia` and within the REPL, type `using Pkg; Pkg.add("Edm4hep.jl")`.
+Run `julia` and within the REPL, type `using Pkg; Pkg.add(PackageSpec(url="https://github.com/Ananya2003Gupta/Edm4hep.jl.git"))`.
 
 ## **Usage Examples:**
 
